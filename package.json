@@ -1,0 +1,27 @@
+{
+  "name": "mq-one",
+  "version": "0.1.1",
+  "description": "one-mq",
+  "main": "./lib/index.js",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build:lib": "tsc",
+    "clean:lib": "rimraf lib"
+  },
+  "devDependencies": {
+    "tslint": "5.10.0",
+    "typescript": "^3.8.3"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com/core-ts/mq-one"
+  },
+  "keywords": [
+    "mq",
+    "mq-one",
+    "message-queue"
+  ]
+}
