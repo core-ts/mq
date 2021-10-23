@@ -2,6 +2,18 @@ import { ErrorMessage, StringMap, toString } from './core';
 import { writeWithRetry as retry2 } from './retry';
 import { write as writeTo } from './write';
 
+export function createHandler<T, R>(
+    write: (data: T) => Promise<number>,
+    validate: (obj: T) => Promise<ErrorMessage[]>,
+    retry: (data: T, header?: StringMap) => Promise<R>,
+    limitRetry: number,
+    retryCountName?: string,
+    handleError?: (obj: T, header?: StringMap) => Promise<void>,
+    logError?: (msg: any) => void,
+    logInfo?: (msg: any) => void,
+    json?: boolean): Handler<T, R> {
+  return new Handler<T, R>(write, validate, [], handleError, logError, logInfo, retry, limitRetry, retryCountName, json);
+}
 export class Handler<T, R> {
   constructor(
       public write: (data: T) => Promise<number>,
