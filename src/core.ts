@@ -8,7 +8,7 @@ export interface ErrorMessage {
   message?: string;
 }
 export interface NumberMap {
-  [key: number|string]: number;
+  [key: number]: number;
 }
 export function createRetry(obj?: NumberMap): number[] {
   const r: number[] = [];
