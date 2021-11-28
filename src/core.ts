@@ -67,9 +67,8 @@ export class RetryService<T, R> {
     });
   }
 }
-declare let promiseFunc: () => Promise<void>;
 export class ErrorHandler<T> {
-  constructor(public logError?: (msg: string) => void, public logInfo?: (msg: string) => void) {
+  constructor(public logError?: (msg: string) => void) {
     this.error = this.error.bind(this);
   }
   error(data: T, header?: StringMap): Promise<void> {
