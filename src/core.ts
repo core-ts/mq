@@ -7,6 +7,25 @@ export interface ErrorMessage {
   param?: string | number | Date;
   message?: string;
 }
+export interface NumberMap {
+  [key: number|string]: number;
+}
+export function createRetry(obj?: NumberMap): number[] {
+  const r: number[] = [];
+  if (!obj) {
+    return r;
+  }
+  const max = 200;
+  for (let i = 1; i <= max; i++) {
+    const v = obj[i];
+    if (v && typeof v === 'number') {
+      r.push(v);
+    } else {
+      return r;
+    }
+  }
+  return r;
+}
 export function toString(v: any, attributes?: StringMap): string {
   if (attributes) {
     const ks = Object.keys(attributes);
