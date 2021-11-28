@@ -1,6 +1,6 @@
 import { StringMap, toString } from './core';
 
-export async function writeWithRetry<T>(t: T, writeT: (x: T) => Promise<number>, retries: number[], handleError?: (data: T, header?: StringMap) => Promise<void>, logError?: (msg: any) => void): Promise<number> {
+export async function writeWithRetry<T>(t: T, writeT: (x: T) => Promise<number>, retries: number[], handleError?: (data: T, header?: StringMap) => Promise<void>, logError?: (msg: string) => void): Promise<number> {
   const l = retries.length;
   const l1 = l - 1;
   let i = 0;
@@ -46,7 +46,7 @@ export class RetryWriter<T> {
       writeT: (data: T) => Promise<number>,
       public retries: number[],
       public writeError?: (data: T) => Promise<number>,
-      public logError?: (msg: any) => void,
+      public logError?: (msg: string) => void,
   ) {
     this.writeTo = writeT;
     this.write = this.write.bind(this);
@@ -55,7 +55,7 @@ export class RetryWriter<T> {
     return writeTo(data, this.writeTo, this.retries, this.writeError, this.logError);
   }
 }
-export async function writeTo<T>(t: T, writeT: (x: T) => Promise<number>, retries?: number[], writeError?: (x: T) => Promise<number>, logError?: (msg: any) => void): Promise<number> {
+export async function writeTo<T>(t: T, writeT: (x: T) => Promise<number>, retries?: number[], writeError?: (x: T) => Promise<number>, logError?: (msg: string) => void): Promise<number> {
   if (!retries || retries.length === 0) {
     return writeT(t).then(r => r).catch(err => {
       if (logError && err) {
@@ -114,7 +114,7 @@ export class RetrySender<T, R> {
       sendT: (data: T, attributes?: StringMap) => Promise<R>,
       public retries: number[],
       public writeError?: (data: T, attributes?: StringMap) => Promise<R>,
-      public logError?: (msg: any) => void,
+      public logError?: (msg: string) => void,
   ) {
     this.sendTo = sendT;
     this.send = this.send.bind(this);
@@ -123,7 +123,7 @@ export class RetrySender<T, R> {
     return send(data, this.sendTo, this.retries, this.writeError, this.logError);
   }
 }
-export async function send<T, R>(t: T, writeT: (data: T, attributes?: StringMap) => Promise<R>, retries?: number[], writeError?: (data: T, attributes?: StringMap) => Promise<R>, logError?: (msg: any) => void): Promise<R> {
+export async function send<T, R>(t: T, writeT: (data: T, attributes?: StringMap) => Promise<R>, retries?: number[], writeError?: (data: T, attributes?: StringMap) => Promise<R>, logError?: (msg: string) => void): Promise<R> {
   if (!retries || retries.length === 0) {
     return writeT(t).then(r => r).catch(err => {
       if (logError && err) {

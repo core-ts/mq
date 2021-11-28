@@ -1,6 +1,6 @@
 {
   "name": "mq-one",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "one-mq",
   "main": "./lib/index.js",
   "types": "./src/index.ts",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/core-ts/mq-one"
+    "url": "git@github.com/core-ts/mq"
   },
   "keywords": [
     "mq",

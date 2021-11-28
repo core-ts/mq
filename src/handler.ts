@@ -9,8 +9,8 @@ export function createHandler<T, R>(
     limitRetry: number,
     retryCountName?: string,
     handleError?: (obj: T, header?: StringMap) => Promise<void>,
-    logError?: (msg: any) => void,
-    logInfo?: (msg: any) => void,
+    logError?: (msg: string) => void,
+    logInfo?: (msg: string) => void,
     json?: boolean): Handler<T, R> {
   return new Handler<T, R>(write, validate, [], handleError, logError, logInfo, retry, limitRetry, retryCountName, json);
 }
@@ -20,8 +20,8 @@ export class Handler<T, R> {
       public validate?: (obj: T) => Promise<ErrorMessage[]>,
       public retries?: number[],
       public handleError?: (obj: T, header?: StringMap) => Promise<void>,
-      public logError?: (msg: any) => void,
-      public logInfo?: (msg: any) => void,
+      public logError?: (msg: string) => void,
+      public logInfo?: (msg: string) => void,
       public retry?: (data: T, header?: StringMap) => Promise<R>,
       limitRetry?: number,
       retryCountName?: string,

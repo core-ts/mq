@@ -12,7 +12,7 @@ export function toString(v: any, attributes?: StringMap): string {
     const ks = Object.keys(attributes);
     if (ks.length > 0) {
       if (typeof v === 'string') {
-        return v + JSON.stringify(attributes);
+        return v + ' ' + JSON.stringify(attributes);
       } else {
         return JSON.stringify(v) + ' ' + JSON.stringify(attributes);
       }
@@ -31,7 +31,7 @@ function ts(v: any): string {
   }
 }
 export class RetryService<T, R> {
-  constructor(private send: (data: T, attributes?: StringMap) => Promise<R>, public logError?: (msg: any) => void, public logInfo?: (msg: any) => void) {
+  constructor(private send: (data: T, attributes?: StringMap) => Promise<R>, public logError?: (msg: string) => void, public logInfo?: (msg: string) => void) {
     this.retry = this.retry.bind(this);
   }
   retry(data: T, header?: StringMap): Promise<R> {
@@ -50,7 +50,7 @@ export class RetryService<T, R> {
 }
 declare let promiseFunc: () => Promise<void>;
 export class ErrorHandler<T> {
-  constructor(public logError?: (msg: any) => void, public logInfo?: (msg: any) => void) {
+  constructor(public logError?: (msg: string) => void, public logInfo?: (msg: string) => void) {
     this.error = this.error.bind(this);
   }
   error(data: T, header?: StringMap): Promise<void> {

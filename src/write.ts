@@ -1,6 +1,6 @@
 import { StringMap, toString } from './core';
 
-export async function write<T, R>(writeTo: (data: T) => Promise<number>, data: T, attributes?: StringMap | undefined, handleError?: (data: T, header?: StringMap) => Promise<void>, retry?: (data: T, header?: StringMap) => Promise<R>, limitRetry?: number, retryCountName?: string, logError?: (msg: any) => void, logInfo?: (msg: any) => void): Promise<number> {
+export async function write<T, R>(writeTo: (data: T) => Promise<number>, data: T, attributes?: StringMap | undefined, handleError?: (data: T, header?: StringMap) => Promise<void>, retry?: (data: T, header?: StringMap) => Promise<R>, limitRetry?: number, retryCountName?: string, logError?: (msg: string) => void, logInfo?: (msg: string) => void): Promise<number> {
   try {
     const r = await writeTo(data);
     return r;
