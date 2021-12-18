@@ -1,6 +1,6 @@
 {
   "name": "mq-one",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "one-mq",
   "main": "./lib/index.js",
   "types": "./src/index.ts",

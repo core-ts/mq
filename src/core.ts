@@ -1,6 +1,14 @@
 export interface StringMap {
   [key: string]: string;
 }
+export type Handle<T> = (data: T, header?: StringMap) => Promise<number>;
+export type Consume<T> = (handle: (data: T, header?: StringMap) => Promise<number>) => void;
+export type Read<T> = Consume<T>;
+export type Subscribe<T> = Consume<T>;
+export type Receive<T> = Consume<T>;
+export type Get<T> = Consume<T>;
+export type Fetch<T> = Consume<T>;
+
 export interface ErrorMessage {
   field: string;
   code: string;
