@@ -8,6 +8,12 @@ export type Subscribe<T> = Consume<T>;
 export type Receive<T> = Consume<T>;
 export type Get<T> = Consume<T>;
 export type Fetch<T> = Consume<T>;
+export type Produce<T, R> = (data: T) => Promise<R>;
+export type Write<T, R> = Produce<T, R>;
+export type Publish<T, R> = Produce<T, R>;
+export type Send<T, R> = Produce<T, R>;
+export type Put<T, R> = Produce<T, R>;
+export type Set<T, R> = Produce<T, R>;
 
 export interface ErrorMessage {
   field: string;
@@ -75,6 +81,7 @@ export class RetryService<T, R> {
     });
   }
 }
+// tslint:disable-next-line:max-classes-per-file
 export class ErrorHandler<T> {
   constructor(public logError?: (msg: string) => void) {
     this.error = this.error.bind(this);

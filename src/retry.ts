@@ -108,6 +108,7 @@ export async function writeTo<T>(t: T, writeT: (x: T) => Promise<number>, retrie
   }
 }
 
+// tslint:disable-next-line:max-classes-per-file
 export class RetrySender<T, R> {
   sendTo: (data: T, attributes?: StringMap) => Promise<R>;
   constructor(
